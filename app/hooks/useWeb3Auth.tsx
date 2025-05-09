@@ -12,7 +12,7 @@ import {
 } from "@web3auth/base";
 import RPC from "@/lib/solanaRPC";
 import { getDefaultExternalAdapters } from "@web3auth/default-solana-adapter";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const clientId = process.env.NEXT_PUBLIC_CLIENT_ID || "";
 
@@ -150,9 +150,9 @@ const useWeb3Auth = () => {
     init();
   }, []);
 
-  const login = async () => {
-    if (!web3auth) {
-      uiConsole("web3auth not initialized yet");
+  const login = useCallback(async () => {
+    if (!web3auth || !web3auth.connect) {
+      console.log("web3auth not initialized yet");
       return;
     }
     const web3authProvider = await web3auth.connect();
@@ -161,7 +161,7 @@ const useWeb3Auth = () => {
       setIsLoggedIn(true);
     }
     setProvider(web3authProvider);
-  };
+  }, [web3auth]);
 
   const authenticateUser = async () => {
     if (!web3auth) {
