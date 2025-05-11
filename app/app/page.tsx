@@ -8,8 +8,13 @@ import RewardList from "../components/RewardList";
 import SchedulePickup from "../components/SchedulePickup";
 // import useWeb3Auth from "../hooks/useWeb3Auth";
 import Logout from "../components/Logout";
+import { useWeb3Auth } from "../contexts/Web3AuthContext";
+import { useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
 
 export default function Page() {
+  const { user } = useWeb3Auth();
+  const userData = useQuery(api.users.getUser, { address: user?.address });
   // const {
   //   getUserInfo,
   //   authenticateUser,
@@ -131,7 +136,7 @@ export default function Page() {
         </div>
 
         <SchedulePickup />
-        <ReGenCard points={0} wasteSaved={`0kg`} />
+        <ReGenCard points={userData?.points || 0} wasteSaved={`0kg`} />
         <ActivityList />
         <RewardList />
       </div>

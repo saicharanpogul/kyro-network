@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
@@ -67,7 +68,7 @@ export const Web3AuthProvider = ({
   useEffect(() => {
     const init = async () => {
       try {
-        const solanaPrivateKeyPrvoider = new SolanaPrivateKeyProvider({
+        const solanaPrivateKeyProvider = new SolanaPrivateKeyProvider({
           config: { chainConfig: chainConfig },
         });
 
@@ -87,7 +88,7 @@ export const Web3AuthProvider = ({
             uxMode: "redirect",
           },
           web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_DEVNET,
-          privateKeyProvider: solanaPrivateKeyPrvoider,
+          privateKeyProvider: solanaPrivateKeyProvider,
           // enableLogging: true,
         });
 
