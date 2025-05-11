@@ -43,12 +43,12 @@ export default function Home() {
               alt=""
               className="rounded-[100px] w-[80px] lg:w-[150px] mr-4 grayscale"
             />
-            <h1 className="mb-2 text-primary-foreground font-primary font-bold text-[56px] lg:text-[112px]">
-              Turning
+            <h1 className="mb-2 text-primary-foreground font-primary font-bold text-[48px] lg:text-[112px]">
+              TURNING
             </h1>
           </div>
-          <h1 className="-mt-6 lg:-mt-10 text-primary-foreground font-primary font-bold text-[56px] lg:text-[112px] leading-tight">
-            your e-waste into tokens
+          <h1 className="-mt-3 lg:-mt-8 text-primary-foreground font-primary font-bold text-[48px] lg:text-[112px] leading-tight">
+            YOUR E-WASTE INTO TOKENS
           </h1>
         </div>
       </main>

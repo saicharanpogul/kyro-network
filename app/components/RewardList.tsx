@@ -2,14 +2,10 @@ import RewardItem from "./RewardItem";
 
 const rewards = [
   {
-    title: "₹50 off at LocalMart",
-    description: "Valid at all stores",
-    points: 50,
-  },
-  {
-    title: "10% off Electronics Repair",
-    description: "At authorized centers",
-    points: 100,
+    title: "Rewards Claiming",
+    description: " Coming Soon...",
+    points: 0,
+    isDisabled: true,
   },
 ];
 

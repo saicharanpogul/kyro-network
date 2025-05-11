@@ -96,7 +96,7 @@ export default function Page() {
   // );
 
   return (
-    <div className="bg-primary justify-items-center min-h-screen !p-8 pb-20 gap-16 sm:p-20 font-primary">
+    <div className="bg-background justify-items-center min-h-screen !p-8 pb-20 gap-16 sm:p-20 font-primary">
       <nav className="w-full flex flex-row items-center justify-between h-10">
         <Link href="/" className="flex flex-row items-center">
           <Image
@@ -114,7 +114,7 @@ export default function Page() {
           <Link
             href="https://x.com/kyrodotgreen"
             target="_blank"
-            className="text-primary-foreground font-primary font-bold text-xl hover:text-black mr-8"
+            className="text-primary-foreground font-primary font-bold text-xl hover:text-primary mr-8"
           >
             𝕏
           </Link>
@@ -125,13 +125,13 @@ export default function Page() {
           <h1 className="text-xl font-bold">
             Recycle your e-waste. Get rewarded.
           </h1>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-popover-foreground">
             Join thousands making a difference
           </p>
         </div>
 
         <SchedulePickup />
-        <ReGenCard points={200} wasteSaved={`1.2kg`} />
+        <ReGenCard points={0} wasteSaved={`0kg`} />
         <ActivityList />
         <RewardList />
       </div>
@@ -141,7 +141,7 @@ export default function Page() {
       <div className="flex w-full"></div>
       {/* </main> */}
       <Logout />
-      <p className="w-full h-px bg-primary-foreground my-4"></p>
+      {/* <p className="w-full h-px bg-primary-foreground my-4">{loggedInView}</p> */}
     </div>
   );
 }
