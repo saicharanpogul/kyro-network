@@ -8,13 +8,15 @@ import RewardList from "../components/RewardList";
 import SchedulePickup from "../components/SchedulePickup";
 // import useWeb3Auth from "../hooks/useWeb3Auth";
 import Logout from "../components/Logout";
-import { useWeb3Auth } from "../contexts/Web3AuthContext";
+// import { useWeb3Auth } from "../contexts/Web3AuthContext";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
+import { useCivicAuth } from "../contexts/CivicAuthContext";
 
 export default function Page() {
-  const { user } = useWeb3Auth();
-  const userData = useQuery(api.users.getUser, { address: user?.address });
+  // const { user } = useWeb3Auth();
+  const { user } = useCivicAuth();
+  const userData = useQuery(api.users.getUser, { email: user?.user.email });
   // const {
   //   getUserInfo,
   //   authenticateUser,

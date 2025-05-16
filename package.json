@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@civic/auth": "^0.5.5",
+    "@civic/auth-web3": "^0.5.9",
     "@hookform/resolvers": "^5.0.1",
     "@radix-ui/react-dialog": "^1.1.13",
     "@radix-ui/react-label": "^2.1.6",

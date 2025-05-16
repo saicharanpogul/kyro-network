@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import ActivityItem from "./ActivityItem";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import useWeb3Auth from "../hooks/useWeb3Auth";
+// import useWeb3Auth from "../hooks/useWeb3Auth";
+import { useCivicAuth } from "../contexts/CivicAuthContext";
 
 export default function ActivityList() {
   const [activities, setActivities] = useState<
@@ -16,12 +17,12 @@ export default function ActivityList() {
     // { title: "iPhone Recycled", points: 100, date: "2025-05-01" },
     // { title: "Cables Recycled", points: 50, date: "2025-04-30" },
   ]);
-  const { user } = useWeb3Auth();
-  const userData = useQuery(api.users.getUser, { address: user?.address });
+  // const { user } = useWeb3Auth();
+  const { user } = useCivicAuth();
+  const userData = useQuery(api.users.getUser, { email: user?.user.email });
   const orders = useQuery(api.orders.getUserOrders, { user: userData?._id });
 
   useEffect(() => {
-    console.log(orders);
     if (orders) {
       const mappedActivities = orders.map((order) => ({
         title: order.product,

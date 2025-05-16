@@ -24,6 +24,8 @@ export const getUserOrders = query({
         .query("orders")
         .withIndex("by_user", (q) => q.eq("user", args.user as Id<"users">))
         .collect();
+    } else {
+      return [];
     }
   },
 });

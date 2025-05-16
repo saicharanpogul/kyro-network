@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import useWeb3Auth from "../hooks/useWeb3Auth";
+// import useWeb3Auth from "../hooks/useWeb3Auth";
 import {
   Dialog,
   DialogContent,
@@ -38,6 +38,8 @@ import { useMutation, useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import OPTIONS from "../constants/options";
 import { useState } from "react";
+// import { UserButton } from "@civic/auth/react";
+import { useCivicAuth } from "../contexts/CivicAuthContext";
 
 const FormSchema = z.object({
   item: z.string({
@@ -50,23 +52,31 @@ const FormSchema = z.object({
 
 export default function SchedulePickup() {
   const [open, setOpen] = useState(false);
+  // const { isLoggedIn, isAuthenticated, user, login, authenticateUser } =
+  //   useWeb3Auth();
   const { isLoggedIn, isAuthenticated, user, login, authenticateUser } =
-    useWeb3Auth();
+    useCivicAuth();
   const createOrderMutation = useMutation(api.orders.createOrder);
-  const userData = useQuery(api.users.getUser, { address: user?.address });
+  const userData = useQuery(api.users.getUser, { email: user?.user.email });
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    await createOrderMutation({
-      user: userData?._id,
-      pickupTime: data.pickupDate.getTime(),
-      product: data.item,
-    });
-    toast("Pickup Scheduled!");
-    setOpen(false);
+    try {
+      await createOrderMutation({
+        user: userData?._id,
+        pickupTime: data.pickupDate.getTime(),
+        product: data.item,
+      });
+      toast("Pickup Scheduled!");
+      setOpen(false);
+      form.reset();
+    } catch (error) {
+      console.error(error);
+      toast("Pickup Failed!");
+    }
   }
 
   const handleLogin = () => login();
@@ -75,9 +85,13 @@ export default function SchedulePickup() {
   const renderActionButton = () => {
     if (!isLoggedIn) {
       return (
-        <Button className="w-full" onClick={handleLogin}>
-          Login
-        </Button>
+        <>
+          <Button className="w-full" onClick={handleLogin}>
+            Login
+          </Button>
+
+          {/* <UserButton /> */}
+        </>
       );
     }
 
